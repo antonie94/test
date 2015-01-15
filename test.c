@@ -1,12 +1,19 @@
-    #include <avr/io.h>
+#ifndef F_CPU
+#define F_CPU 4000000UL // 16 MHz clock speed
+#endif
 
-    int main(void)
-    {
-    // Set Port D pins as all outputs
-    DDRD = 0xff;
+#include <avr/io.h>
+#include <util/delay.h>
 
-    // Set all Port D pins as HIGH
-    PORTD = 0xFF;
+int main(void)
+{
+  DDRC = 0xFF; //Nakes PORTC as Output
+  while(1) //infinite loop
+  {
+    PORTC = 0xFF; //Turns ON All LEDs
+    _delay_ms(1000); //1 second delay
+    PORTC= 0x00; //Turns OFF All LEDs
+    _delay_ms(1000); //1 second delay
+  }
+}
 
-    return 1;
-    }
